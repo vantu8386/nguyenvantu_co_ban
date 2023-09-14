@@ -1,0 +1,38 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #eeeeee;
+}
+
+.inpur{
+  width: 40%;
+  margin: auto;
+  padding: 2%;
+}
+
+h1{
+  background-color:#64b5f6;
+  color: white;
+  padding: 30px;
+  font-size: 50px;
+}
+
+.user-manage{
+  text-align: center;
+}
+
+.todoList{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+
+}
+p{
+  background-color: aliceblue;
+  padding: 10px 5px;
+  display: flex;
+  justify-content: start ;
+}
