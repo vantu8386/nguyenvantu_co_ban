@@ -46,6 +46,47 @@ export default function TodoList() {
       })
       .catch((err) => console.log(err));
   };
+
+  const handleDeleteWorks = (id) => {
+    axios
+      .delete(`http://localhost:3000/api/v1/works/${id}`)
+      .then((res) => {
+        console.log("Công việc chưa hoàn thành đã được xóa thành công");
+        loadWorks();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleCheckWorks = (id) => {
+    axios
+      .put(`http://localhost:3000/api/v1/works/${id}`, {})
+      .then((res) => {
+        console.log("Công việc đã chuyển trạng thái thành công");
+        loadWorks();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleDeleteComplete = (id) => {
+    console.log(id);
+    axios
+      .delete(`http://localhost:3000/api/v1/completed/${id}`)
+      .then((res) => {
+        console.log("Công việc đã hoàn thành đã được xóa thành công");
+        loadCompleted();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleCheckCompleted = (id) => {
+    axios
+      .put(`http://localhost:3000/api/v1/completed/${id}`, {})
+      .then((res) => {
+        console.log("Công việc đã chuyển trạng thái thành công");
+        loadWorks();
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="user-manage">
       <h1>TODO LIST</h1>
@@ -72,7 +113,28 @@ export default function TodoList() {
             <div>
               {works.map((work, index) => (
                 <div key={index}>
-                  <p>{work.name}</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "10px 5px",
+                      margin: "10px 0px",
+                      backgroundColor: "white",
+                    }}
+                  >
+                    {work.name}{" "}
+                    <div>
+                      <i
+                        onClick={() => handleDeleteWorks(work.id)}
+                        className="fa-solid fa-trash-can"
+                      ></i>
+                      <i
+                        style={{ paddingLeft: "10px" }}
+                        onClick={() => handleCheckWorks(work.id)}
+                        className="fa-regular fa-circle-check"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -82,7 +144,28 @@ export default function TodoList() {
             <div>
               {completed.map((completedTask, index) => (
                 <div key={index}>
-                  <p>{completedTask.name}</p>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      padding: "10px 5px",
+                      margin: "10px 0px",
+                      backgroundColor: "white",
+                    }}
+                  >
+                    {completedTask.name}
+                    <div>
+                      <i
+                        onClick={() => handleDeleteComplete(completedTask.id)}
+                        className="fa-solid fa-trash-can"
+                      ></i>
+                      <i
+                        style={{ paddingLeft: "10px" }}
+                        onClick={() => handleCheckCompleted(completedTask.id)}
+                        className="fa-solid fa-circle-check"
+                      ></i>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
